@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import AddUser from './Components/AddUser';
-import AllUsers from './Components/AllUser';
+import AllUsers from './Components/AllUsers';
+import EditUser from './Components/EditUser';
 import Navbar from './Components/Navbar';
 import Remark from './Components/Remark';
 
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Remark />} />
           <Route path="/all" element={<AllUsers />} />
           <Route path="/add" element={<AddUser />} />
+          <Route path="/edit/:id" element={<EditUser />} />
         </Routes>
       </BrowserRouter>
     </div>

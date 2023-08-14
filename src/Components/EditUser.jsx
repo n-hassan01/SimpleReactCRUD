@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   Button,
   FormControl,
@@ -7,11 +9,11 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { addUser } from "../Services/apiService";
+import { useNavigate, useParams } from "react-router-dom";
+import { editUser, getUsers } from "../Services/apiService";
 
 const initialValue = {
+  id: "",
   name: "",
   designation: "",
 };
@@ -20,28 +22,40 @@ const Container = styled(FormGroup)`
     width: 50%;
     margin: 5% 0 0 25%;
     & > div {
-        margin-top: 20px;
+        margin-top: 20px
 `;
 
-const AddUser = () => {
+const EditUser = () => {
   const [user, setUser] = useState(initialValue);
   const { name, designation } = user;
+  const { id } = useParams();
+
   let navigate = useNavigate();
 
-  const onValueChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+  useEffect(() => {
+    loadUserDetails();
+  }, []);
+
+  const loadUserDetails = async () => {
+    const response = await getUsers(id);
+    setUser(response.data);
   };
 
-  const addUserDetails = async () => {
-    console.log(user);
-    const response = await addUser(user);
+  const editUserDetails = async () => {
+    const response = await editUser(id, user);
+    console.log(response);
     alert(response.data);
     navigate("/all");
   };
 
+  const onValueChange = (e) => {
+    console.log(e.target.value);
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
   return (
     <Container>
-      <Typography variant="h4">Add Employee</Typography>
+      <Typography variant="h4">Edit Information</Typography>
       <FormControl>
         <InputLabel htmlFor="my-input">Name</InputLabel>
         <Input
@@ -49,6 +63,7 @@ const AddUser = () => {
           name="name"
           value={name}
           id="my-input"
+          aria-describedby="my-helper-text"
         />
       </FormControl>
       <FormControl>
@@ -58,20 +73,21 @@ const AddUser = () => {
           name="designation"
           value={designation}
           id="my-input"
+          aria-describedby="my-helper-text"
         />
       </FormControl>
 
       <FormControl>
         <Button
           variant="contained"
-          style={{ backgroundColor: "#00416B" }}
-          onClick={() => addUserDetails()}
+          color="primary"
+          onClick={() => editUserDetails()}
         >
-          Add Employee
+          Edit User
         </Button>
       </FormControl>
     </Container>
   );
 };
 
-export default AddUser;
+export default EditUser;

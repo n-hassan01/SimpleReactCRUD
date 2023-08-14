@@ -39,7 +39,8 @@ const AllUser = () => {
   }, []);
 
   const deleteUserData = async (id) => {
-    await deleteUser(id);
+    const response = await deleteUser(id);
+    alert(response.data);
     getAllUsers();
   };
 
