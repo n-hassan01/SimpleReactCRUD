@@ -8,6 +8,7 @@ import {
   styled,
 } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { addUser } from "../Services/apiService";
 
 const initialValue = {
@@ -25,7 +26,7 @@ const Container = styled(FormGroup)`
 const AddUser = () => {
   const [user, setUser] = useState(initialValue);
   const { name, designation } = user;
-  //   let navigate = useNavigate();
+  let navigate = useNavigate();
 
   const onValueChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -34,7 +35,7 @@ const AddUser = () => {
   const addUserDetails = async () => {
     console.log(user);
     await addUser(user);
-    // navigate("/all");
+    navigate("/all");
   };
 
   return (

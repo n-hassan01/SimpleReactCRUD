@@ -17,13 +17,13 @@ const Navbar = () => {
     <Header position="static">
       <Toolbar>
         <Tabs to="./" exact>
-          REMARK
+          REMARK HB
         </Tabs>
         <Tabs to="all" exact>
-          All Users
+          All Employees
         </Tabs>
         <Tabs to="add" exact>
-          Add User
+          Add Employee
         </Tabs>
       </Toolbar>
     </Header>
