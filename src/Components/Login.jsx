@@ -12,6 +12,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "../Services/apiService";
 
 function Copyright(props) {
   return (
@@ -34,13 +37,35 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
-  const handleSubmit = (event) => {
+  const initialValue = {
+    username: "",
+    password: "",
+  };
+
+  const [user, setUser] = useState(initialValue);
+  let navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("username"),
       password: data.get("password"),
     });
+
+    setUser({
+      ...user,
+      username: data.get("username"),
+      password: data.get("password"),
+    });
+    console.log(user);
+
+    const response = await login(user);
+    if (response.request.status === 200) {
+      alert(response.data.message);
+      navigate("/add");
+    }
+
     window.authorized = true;
   };
 

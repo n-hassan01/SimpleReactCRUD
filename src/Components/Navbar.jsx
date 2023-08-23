@@ -1,5 +1,5 @@
 import { AppBar, Button, Toolbar, styled } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Header = styled(AppBar)`
   background: #d71921;
@@ -23,9 +23,12 @@ const LogoutButton = styled(Button)`
 `;
 
 const Navbar = () => {
+  let navigate = useNavigate();
   function valueChanged() {
     window.authorized = false;
+    navigate("/");
   }
+  const authButtonDisplay = window.authorized ? "block" : "none";
 
   return (
     <Header position="static">
@@ -39,7 +42,12 @@ const Navbar = () => {
         <Tabs to="add" exact>
           Add Employee
         </Tabs>
-        <LogoutButton onClick={() => valueChanged()}>Logout</LogoutButton>
+        <LogoutButton
+          style={{ display: authButtonDisplay }}
+          onClick={() => valueChanged()}
+        >
+          logout
+        </LogoutButton>
       </Toolbar>
     </Header>
   );
