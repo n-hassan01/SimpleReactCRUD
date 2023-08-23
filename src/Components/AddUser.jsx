@@ -33,7 +33,6 @@ const AddUser = () => {
   };
 
   const addUserDetails = async () => {
-    console.log(user);
     const response = await addUser(user);
     alert(response.data);
     navigate("/all");

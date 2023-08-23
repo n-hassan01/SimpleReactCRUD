@@ -1,7 +1,8 @@
 const Remark = () => {
+  window.displayNavbar = true;
+
   return (
     <>
-      {/* <Navbar /> */}
       <h1>Welcome to Remark HB Limited</h1>
     </>
   );

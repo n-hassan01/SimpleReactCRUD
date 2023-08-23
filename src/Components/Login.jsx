@@ -22,16 +22,14 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://naimulhassan-b5d78.web.app/">
+        Naimul Hassan
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
   );
 }
-
-// TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
@@ -58,7 +56,7 @@ export default function SignInSide() {
           sx={{
             backgroundImage:
               "url(https://us.remarkhb.com/wp-content/uploads/2022/05/remarkhpsidebarimage.jpg)",
-            //   "url(https://us.remarkhb.com/wp-content/uploads/2023/07/parallax-effect-1024x640.jpg)",
+            // "url(https://us.remarkhb.com/wp-content/uploads/2023/07/parallax-effect-1024x640.jpg)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"

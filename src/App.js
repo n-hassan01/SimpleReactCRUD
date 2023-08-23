@@ -9,9 +9,6 @@ import PrivateRoute from './Components/PrivateRoute';
 import Remark from './Components/Remark';
 
 function App() {
-  if(window.navbar) {
-    
-  }
   return (
     <div className="App">
       <BrowserRouter>

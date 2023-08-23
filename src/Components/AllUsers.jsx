@@ -32,6 +32,8 @@ const TRow = styled(TableRow)`
 `;
 
 const AllUser = () => {
+  window.displayNavbar = true;
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -45,15 +47,12 @@ const AllUser = () => {
   };
 
   const getAllUsers = async () => {
-    console.log(window.authorized);
     let response = await getUsers();
     setUsers(response?.data);
   };
 
   return (
     <>
-      {/* <Navbar /> */}
-
       <StyledTable>
         <TableHead>
           <THead>
