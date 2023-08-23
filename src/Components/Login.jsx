@@ -45,6 +45,10 @@ export default function SignInSide() {
   const [user, setUser] = useState(initialValue);
   let navigate = useNavigate();
 
+  const onValueChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -53,16 +57,9 @@ export default function SignInSide() {
       password: data.get("password"),
     });
 
-    setUser({
-      ...user,
-      username: data.get("username"),
-      password: data.get("password"),
-    });
-    console.log(user);
-
     const response = await login(user);
+    alert(response.data.message);
     if (response.request.status === 200) {
-      alert(response.data.message);
       navigate("/add");
     }
 
@@ -122,6 +119,7 @@ export default function SignInSide() {
                 name="username"
                 autoComplete="username"
                 autoFocus
+                onChange={(e) => onValueChange(e)}
               />
               <TextField
                 margin="normal"
@@ -132,6 +130,7 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(e) => onValueChange(e)}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
