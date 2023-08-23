@@ -45,49 +45,54 @@ const AllUser = () => {
   };
 
   const getAllUsers = async () => {
+    console.log(window.authorized);
     let response = await getUsers();
     setUsers(response?.data);
   };
 
   return (
-    <StyledTable>
-      <TableHead>
-        <THead>
-          <TableCell>ID</TableCell>
-          <TableCell>NAME</TableCell>
-          <TableCell>DESIGNATION</TableCell>
-          <TableCell></TableCell>
-        </THead>
-      </TableHead>
-      <TableBody>
-        {users?.map((user) => (
-          <TRow key={user.id}>
-            <TableCell>{user.id}</TableCell>
-            <TableCell>{user.name}</TableCell>
-            <TableCell>{user.designation}</TableCell>
+    <>
+      {/* <Navbar /> */}
 
-            <TableCell>
-              <Button
-                color="primary"
-                variant="contained"
-                style={{ marginRight: 10 }}
-                component={Link}
-                to={`/edit/${user.id}`}
-              >
-                Edit
-              </Button>
-              <Button
-                color="error"
-                variant="contained"
-                onClick={() => deleteUserData(user.id)}
-              >
-                Delete
-              </Button>
-            </TableCell>
-          </TRow>
-        ))}
-      </TableBody>
-    </StyledTable>
+      <StyledTable>
+        <TableHead>
+          <THead>
+            <TableCell>ID</TableCell>
+            <TableCell>NAME</TableCell>
+            <TableCell>DESIGNATION</TableCell>
+            <TableCell></TableCell>
+          </THead>
+        </TableHead>
+        <TableBody>
+          {users?.map((user) => (
+            <TRow key={user.id}>
+              <TableCell>{user.id}</TableCell>
+              <TableCell>{user.name}</TableCell>
+              <TableCell>{user.designation}</TableCell>
+
+              <TableCell>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  style={{ marginRight: 10 }}
+                  component={Link}
+                  to={`/edit/${user.id}`}
+                >
+                  Edit
+                </Button>
+                <Button
+                  color="error"
+                  variant="contained"
+                  onClick={() => deleteUserData(user.id)}
+                >
+                  Delete
+                </Button>
+              </TableCell>
+            </TRow>
+          ))}
+        </TableBody>
+      </StyledTable>
+    </>
   );
 };
 

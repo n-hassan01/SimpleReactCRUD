@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, styled } from "@mui/material";
+import { AppBar, Button, Toolbar, styled } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 const Header = styled(AppBar)`
@@ -12,7 +12,21 @@ const Tabs = styled(NavLink)`
   font-size: 20px;
 `;
 
+const LogoutButton = styled(Button)`
+  position: absolute;
+  right: 20px;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: rgb(0, 65, 107);
+  color: white;
+`;
+
 const Navbar = () => {
+  function valueChanged() {
+    window.authorized = false;
+  }
+
   return (
     <Header position="static">
       <Toolbar>
@@ -25,6 +39,7 @@ const Navbar = () => {
         <Tabs to="add" exact>
           Add Employee
         </Tabs>
+        <LogoutButton onClick={() => valueChanged()}>Logout</LogoutButton>
       </Toolbar>
     </Header>
   );
