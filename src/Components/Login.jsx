@@ -6,15 +6,13 @@ import Checkbox from "@mui/material/Checkbox";
 import CssBaseline from "@mui/material/CssBaseline";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-// import Cookies from "universal-cookie";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../Services/apiService";
 import removeCookie from "../Services/removeCookie";
 import setCookie from "../Services/setCookies";
@@ -157,12 +155,16 @@ export default function SignInSide() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link to="/" style={{ color: "#1976d2" }} variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="../Components/Remark.jsx" variant="body2">
+                  <Link
+                    to="/Signup"
+                    style={{ color: "#1976d2" }}
+                    variant="body2"
+                  >
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

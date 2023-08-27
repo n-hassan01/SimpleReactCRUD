@@ -7,6 +7,7 @@ import Login from './Components/Login';
 import Navbar from './Components/Navbar';
 import PrivateRoute from './Components/PrivateRoute';
 import Remark from './Components/Remark';
+import Signup from './Components/Signup';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/add" element={<PrivateRoute><AddUser /></PrivateRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/edit/:id" element={<EditUser />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>
     </div>
