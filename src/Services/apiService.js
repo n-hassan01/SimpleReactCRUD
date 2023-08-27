@@ -1,9 +1,16 @@
 import axios from 'axios';
+import getCookie from './getCookies';
 
 const usersUrl = 'http://localhost:5000/users/';
 
 export const addUser = async (user) => {
-    return await axios.post(`${usersUrl}add/`, user);
+    const cookie = getCookie('jwt-token-cookie');
+    
+    return await axios.post(`${usersUrl}add/`, user, {
+        headers: {
+            Authorization: `Bearer ${cookie}`
+        }
+    });
 }
 
 export const getUsers = async (id) => {
@@ -16,7 +23,17 @@ export const getUsers = async (id) => {
 }
 
 export const deleteUser = async (id) => {
-    return await axios.delete(`${usersUrl}delete/${id}`);
+    const cookie = getCookie('jwt-token-cookie');
+    
+    try {
+        return await axios.delete(`${usersUrl}delete/${id}`, {
+            headers: {
+                Authorization: `Bearer ${cookie}`
+            }
+        });
+    } catch (err) {
+        return "Forbidden to delete users";
+    }
 }
 
 export const editUser = async (id, user) => {

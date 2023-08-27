@@ -42,7 +42,12 @@ const AllUser = () => {
 
   const deleteUserData = async (id) => {
     const response = await deleteUser(id);
-    alert(response.data);
+
+    if (response.data) {
+      alert(response.data);
+    } else {
+      alert("Forbidden to delete users");
+    }
     getAllUsers();
   };
 

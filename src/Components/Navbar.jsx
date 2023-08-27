@@ -1,5 +1,7 @@
 import { AppBar, Button, Toolbar, styled } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
+import getCookie from "../Services/getCookies";
+import removeCookie from "../Services/removeCookie";
 
 const Header = styled(AppBar)`
   background: #d71921;
@@ -25,6 +27,9 @@ const LogoutButton = styled(Button)`
 const Navbar = () => {
   let navigate = useNavigate();
   function valueChanged() {
+    console.log("logout");
+    removeCookie("jwt-token-cookie");
+    console.log(getCookie("jwt-token-cookie"));
     window.authorized = false;
     navigate("/");
   }

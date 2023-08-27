@@ -14,7 +14,10 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import Cookies from "universal-cookie";
 import { login } from "../Services/apiService";
+import removeCookie from "../Services/removeCookie";
+import setCookie from "../Services/setCookies";
 
 function Copyright(props) {
   return (
@@ -58,7 +61,15 @@ export default function SignInSide() {
     });
 
     const response = await login(user);
-    alert(response.data.message);
+
+    // alert(response.data.message);
+    const token = response.data.value;
+    console.log(token);
+    const cookieName = "jwt-token-cookie";
+    console.log(cookieName);
+    removeCookie(cookieName);
+    const cookie = setCookie(cookieName, token);
+    console.log(cookie);
     if (response.request.status === 200) {
       navigate("/add");
     }
