@@ -5,7 +5,7 @@ const Remark = () => {
     background-color: rgb(0, 65, 107);
     color: white;
     padding: 10px;
-    width: 150px;
+    min-width: 150px;
   `;
 
   function changeColor(e) {
