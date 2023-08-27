@@ -1,10 +1,27 @@
+import { Button, styled } from "@mui/material";
+
 const Remark = () => {
-  window.displayNavbar = true;
+  const RegButton = styled(Button)`
+    background-color: rgb(0, 65, 107);
+    color: white;
+    padding: 10px;
+    width: 150px;
+  `;
+
+  function changeColor(e) {
+    e.target.style.color = "rgb(0, 65, 107)";
+  }
+
+  function changeBgColor(e) {
+    e.target.style.color = "white";
+  }
 
   return (
     <>
       <h1>Welcome to Remark HB Limited</h1>
-      <button>Register here</button>
+      <RegButton onMouseEnter={changeColor} onMouseLeave={changeBgColor}>
+        Register here
+      </RegButton>
     </>
   );
 };
