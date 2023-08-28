@@ -34,7 +34,11 @@ const AddUser = () => {
 
   const addUserDetails = async () => {
     const response = await addUser(user);
-    alert(response.data);
+    if (response.data) {
+      alert(response.data);
+    } else {
+      alert(response);
+    }
     navigate("/all");
   };
 

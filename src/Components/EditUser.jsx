@@ -44,7 +44,11 @@ const EditUser = () => {
   const editUserDetails = async () => {
     const response = await editUser(id, user);
     console.log(response);
-    alert(response.data);
+    if (response.data) {
+      alert(response.data);
+    } else {
+      console.log("Forbidden to edit");
+    }
     navigate("/all");
   };
 

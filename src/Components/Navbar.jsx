@@ -30,6 +30,7 @@ const Navbar = () => {
     console.log("logout");
     removeCookie("jwt-token-cookie");
     console.log(getCookie("jwt-token-cookie"));
+
     window.authorized = false;
     navigate("/");
   }

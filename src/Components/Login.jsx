@@ -54,18 +54,20 @@ export default function SignInSide() {
     event.preventDefault();
 
     const response = await login(user);
-    alert(response.data.message);
-
-    const token = response.data.value;
-    const cookieName = "jwt-token-cookie";
-
-    removeCookie(cookieName);
-
-    const cookie = setCookie(cookieName, token);
-    console.log(cookie);
 
     if (response.request.status === 200) {
+      alert(response.data.message);
+
+      const token = response.data.value;
+      const cookieName = "jwt-token-cookie";
+
+      removeCookie(cookieName);
+
+      const cookie = setCookie(cookieName, token);
+      console.log(cookie);
       navigate("/add");
+    } else {
+      alert("Login failed! Try again");
     }
 
     window.authorized = true;
