@@ -69,6 +69,7 @@ export default function Signup() {
         alert("Signup successful!");
         navigate("/login");
       } else {
+        console.log(response);
         alert("Signup failed! Try again");
         navigate("/");
       }

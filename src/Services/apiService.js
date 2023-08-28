@@ -45,5 +45,9 @@ export const login = async (user) => {
 }
 
 export const signup = async (user) => {
-    return await axios.post('http://localhost:4000/signup/', user)
+    try{
+        return await axios.post('http://localhost:4000/signup/', user)
+    } catch (err) {
+        return err.message;
+    }
 }
