@@ -5,13 +5,20 @@ import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
+import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
 import Link from "@mui/material/Link";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { signup } from "../Services/apiService";
 
 function Copyright(props) {
   return (
@@ -31,18 +38,43 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 export default function Signup() {
-  const handleSubmit = (event) => {
+  const initialValue = {
+    name: "",
+    username: "",
+    password: "",
+    role: "",
+  };
+
+  const [newUser, setnewUser] = useState(initialValue);
+  let navigate = useNavigate();
+
+  const onValueChange = (e) => {
+    setnewUser({ ...newUser, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
     console.log({
-      username: data.get("username"),
-      role: data.get("role"),
+      user: newUser,
     });
+
+    try {
+      const response = await signup(newUser);
+      console.log(response);
+
+      if (response.status === 200) {
+        alert("Signup successful!");
+        navigate("/login");
+      } else {
+        alert("Signup failed! Try again");
+        navigate("/");
+      }
+    } catch (err) {
+      alert("Signup failed! Try again");
+    }
   };
 
   return (
@@ -79,6 +111,7 @@ export default function Signup() {
                   id="name"
                   label="Name"
                   autoFocus
+                  onChange={(e) => onValueChange(e)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -89,6 +122,7 @@ export default function Signup() {
                   label="User Name"
                   name="username"
                   autoComplete="user-name"
+                  onChange={(e) => onValueChange(e)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -100,17 +134,29 @@ export default function Signup() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={(e) => onValueChange(e)}
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="role"
-                  label="User Role"
-                  name="role"
-                  autoComplete="role"
-                />
+                <FormControl fullWidth>
+                  <InputLabel id="role">Role</InputLabel>
+                  <Select
+                    labelId="role"
+                    required
+                    fullWidth
+                    name="role"
+                    label="role"
+                    id="role"
+                    autoComplete="role"
+                    onChange={(e) => onValueChange(e)}
+                  >
+                    <MenuItem value={"1"}>Admin</MenuItem>
+                    <MenuItem value={"2"}>IT</MenuItem>
+                    <MenuItem value={"3"}>Sales</MenuItem>
+                    <MenuItem value={"4"}>HR</MenuItem>
+                    <MenuItem value={"5"}>Management</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel

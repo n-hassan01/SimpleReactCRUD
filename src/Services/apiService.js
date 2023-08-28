@@ -43,3 +43,7 @@ export const editUser = async (id, user) => {
 export const login = async (user) => {
     return await axios.post(`${usersUrl}login/`, user)
 }
+
+export const signup = async (user) => {
+    return await axios.post('http://localhost:4000/signup/', user)
+}

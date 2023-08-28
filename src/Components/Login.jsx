@@ -52,22 +52,18 @@ export default function SignInSide() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("username"),
-      password: data.get("password"),
-    });
 
     const response = await login(user);
+    alert(response.data.message);
 
-    // alert(response.data.message);
     const token = response.data.value;
-    console.log(token);
     const cookieName = "jwt-token-cookie";
-    console.log(cookieName);
+
     removeCookie(cookieName);
+
     const cookie = setCookie(cookieName, token);
     console.log(cookie);
+
     if (response.request.status === 200) {
       navigate("/add");
     }
