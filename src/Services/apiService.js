@@ -1,7 +1,7 @@
 import axios from 'axios';
 import getCookie from './getCookies';
 
-const usersUrl = 'http://localhost:5000/users/';
+const usersUrl = 'http://localhost:4000/users/';
 
 export const addUser = async (user) => {
     const cookie = getCookie('jwt-token-cookie');
@@ -62,6 +62,16 @@ export const signup = async (user) => {
     try{
         return await axios.post('http://localhost:4000/signup/', user)
     } catch (err) {
+        return err.message;
+    }
+}
+
+export const addBrands = async (brand) => {
+    try{
+        return await axios.post('http://localhost:4000/brands/add/', brand)
+    } catch (err) {
+        console.log(err);
+        
         return err.message;
     }
 }

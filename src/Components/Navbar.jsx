@@ -48,6 +48,9 @@ const Navbar = () => {
         <Tabs to="add" exact>
           Add Employee
         </Tabs>
+        <Tabs to="brands" exact>
+          Our Brands
+        </Tabs>
         <LogoutButton
           style={{ display: authButtonDisplay }}
           onClick={() => valueChanged()}
